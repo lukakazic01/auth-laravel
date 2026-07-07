@@ -7,12 +7,20 @@
     @endguest
     @auth
         <div class="flex justify-between w-full gap-6">
-            <a class="{{ route('home') }}">Home</a>
+            <div class="flex items-center gap-6">
+                <a href="{{ route('home') }}">Home</a>
+                @if (auth()->user()->role === 'admin')
+                    <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+                    <a href="{{ route('admin.create-city') }}">Create city</a>
+                    <a href="{{ route('admin.edit-city') }}">Edit city</a>
+                @endif
+            </div>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="cursor-pointer">Logout</button>
             </form>
         </div>
+
     @endauth
     <x-theme-switcher />
 </nav>
