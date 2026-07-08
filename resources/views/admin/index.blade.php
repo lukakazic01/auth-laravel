@@ -1,8 +1,13 @@
 <x-layout>
     <div class="container mx-auto mt-10">
-        <div class="relative overflow-x-auto bg-white shadow-sm rounded-lg border border-gray-200">
+        @if(session()->has('success'))
+            <div class="bg-green-100 rounded-lg mb-6 border border-green-500 text-green-500 w-full px-6 py-4 text-center">
+                {{ session()->get('success') }}
+            </div>
+        @endif
+        <div class="relative overflow-x-auto shadow-sm rounded-lg border border-gray-200 dark:border-0">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-                <thead class="text-sm text-gray-700 bg-gray-100 border-b border-gray-300">
+                <thead class="text-sm text-gray-700 dark:text-white bg-gray-100 dark:bg-gray-700 border-b border-gray-300 dark:border-b-0">
                 <tr>
                     <th scope="col" class="px-6 py-3 font-medium">
                         City
