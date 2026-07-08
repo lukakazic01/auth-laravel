@@ -4,6 +4,7 @@ use App\Http\Controllers\WeatherController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WeatherController::class, 'index'])->middleware('auth')->name('home');
+Route::redirect('/prognoza', '/');
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [WeatherController::class, 'index'])->name('dashboard');
