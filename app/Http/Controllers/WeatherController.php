@@ -10,7 +10,8 @@ class WeatherController extends Controller
 
     public function index()
     {
-        return view('admin.index');
+        $cities = WeatherModel::all();
+        return view('admin.index', compact('cities'));
     }
 
     public function create()
@@ -44,9 +45,9 @@ class WeatherController extends Controller
         //
     }
 
-    public function edit()
+    public function edit(WeatherModel $city)
     {
-        return view('admin.edit-city');
+        return view('admin.edit-city', compact('city'));
     }
 
     public function update(Request $request, string $id)
