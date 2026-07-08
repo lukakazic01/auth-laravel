@@ -13,15 +13,18 @@ class UserWeatherSeeder extends Seeder
     {
         $total = $this->command->ask('How much cities would you like to create?', 1);
         if (!is_numeric($total)) {
-            throw new \Exception('Total should be of type number');
+            $this->command->getOutput()->error('Total should be of type number');
+            return;
         }
         $cityName = trim($this->command->ask('What should be the name of the city?'));
         if ($cityName === '') {
-            throw new \Exception('City name is missing');
+            $this->command->getOutput()->error('City name is missing');
+            return;
         }
         $temperature = $this->command->ask('What would be the temperature in that city?');
         if (!isset($temperature) || !is_numeric($temperature) || !str_contains($temperature, '.')) {
-            throw new \Exception('Temperature is missing or is invalid format');
+            $this->command->getOutput()->error('Temperature is missing or is invalid format');
+            return;
         }
         $this->command->getOutput()->progressStart($total);
         for ($i = 0; $i < $total; $i++) {
@@ -32,5 +35,6 @@ class UserWeatherSeeder extends Seeder
             $this->command->getOutput()->progressAdvance(1);
         }
         $this->command->getOutput()->progressFinish();
+        $this->command->getOutput()->success('Created models successfully');
     }
 }
