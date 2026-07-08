@@ -18,11 +18,13 @@ class WeatherSeeder extends Seeder
         $chunkSize = $this->command->ask('How much cities would you like to create per iteration?', 1);
         $cityName = $this->command->ask('What should be the name of the city?');
         if (!isset($cityName)) {
-            throw new \Exception('City name is missing');
+            $this->command->getOutput()->error('City name is missing');
+            return;
         }
         $temperature = $this->command->ask('What would be the temperature in that city?');
         if (!isset($temperature)) {
-            throw new \Exception('Temperature is missing');
+            $this->command->getOutput()->error('Temperature is missing');
+            return;
         }
         $this->command->getOutput()->progressStart($total);
         for ($i = 0; $i < $total; $i += $chunkSize) {
@@ -30,5 +32,6 @@ class WeatherSeeder extends Seeder
             $this->command->getOutput()->progressAdvance($chunkSize);
         }
         $this->command->getOutput()->progressFinish();
+        $this->command->getOutput()->success('All cities were successfully created');
     }
 }
