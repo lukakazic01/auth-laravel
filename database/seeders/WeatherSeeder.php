@@ -9,9 +9,6 @@ use Illuminate\Database\Seeder;
 class WeatherSeeder extends Seeder
 {
 
-    /**
-     * @throws \Exception
-     */
     public function run(): void
     {
         $total = $this->command->ask('How many cities would you like to create?', 1);

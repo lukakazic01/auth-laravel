@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
 
     public function run(): void
     {
+
         $total = $this->command->ask('How many users would you like to create?', 1);
         if (!is_numeric($total)) {
             $this->command->getOutput()->error("Total number of users must be a number");

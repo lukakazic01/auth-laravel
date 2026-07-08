@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 
 class UserWeatherSeeder extends Seeder
 {
+
     private function doesCityExists(string $input): bool {
         $city = WeatherModel::query()->where(['city' => $input])->first()->getAttributeValue('city');
         return strtolower($city) === strtolower($input);
