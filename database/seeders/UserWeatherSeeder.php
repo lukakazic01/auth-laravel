@@ -8,6 +8,10 @@ use Illuminate\Database\Seeder;
 
 class UserWeatherSeeder extends Seeder
 {
+    private function doesCityExists(string $input): bool {
+        $city = WeatherModel::query()->where(['city' => $input])->first()->getAttributeValue('city');
+        return strtolower($city) === strtolower($input);
+    }
 
     public function run(): void
     {
@@ -19,6 +23,10 @@ class UserWeatherSeeder extends Seeder
         $city = trim($this->command->ask('What should be the name of the city?'));
         if ($city === '') {
             $this->command->getOutput()->error('City name is missing');
+            return;
+        }
+        if ($this->doesCityExists($city)) {
+            $this->command->getOutput()->error("$city city already exists");
             return;
         }
         $temperature = $this->command->ask('What would be the temperature in that city?');
