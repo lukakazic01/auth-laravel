@@ -16,8 +16,8 @@ class UserWeatherSeeder extends Seeder
             $this->command->getOutput()->error('Total should be of type number');
             return;
         }
-        $cityName = trim($this->command->ask('What should be the name of the city?'));
-        if ($cityName === '') {
+        $city = trim($this->command->ask('What should be the name of the city?'));
+        if ($city === '') {
             $this->command->getOutput()->error('City name is missing');
             return;
         }
@@ -29,12 +29,12 @@ class UserWeatherSeeder extends Seeder
         $this->command->getOutput()->progressStart($total);
         for ($i = 0; $i < $total; $i++) {
             WeatherModel::factory()->create([
-                'city' => $cityName,
+                'city' => $city,
                 'temperature' => $temperature,
             ]);
             $this->command->getOutput()->progressAdvance(1);
         }
         $this->command->getOutput()->progressFinish();
-        $this->command->getOutput()->success('Created models successfully');
+        $this->command->getOutput()->success("Created $city city with a temperature $temperature successfully!");
     }
 }
