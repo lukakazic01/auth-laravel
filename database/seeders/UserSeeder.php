@@ -13,6 +13,13 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->count(1)->create();
+        $total = 10;
+        $chunkSize = 1;
+        $this->command->getOutput()->progressStart($total);
+        for($i = 0; $i < $total; $i += $chunkSize) {
+            User::factory()->create();
+            $this->command->getOutput()->progressAdvance($chunkSize);
+        }
+        $this->command->getOutput()->progressFinish();
     }
 }
