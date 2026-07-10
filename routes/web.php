@@ -4,7 +4,7 @@ use App\Http\Controllers\WeatherController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WeatherController::class, 'index'])->middleware('auth')->name('home');
-Route::get('/forecast/{city:city}', [WeatherController::class, 'show'])->middleware('auth')->name('show-city');
+Route::get('/forecast/{city}', [WeatherController::class, 'show'])->middleware('auth')->name('show-city');
 Route::redirect('/prognoza', '/');
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
