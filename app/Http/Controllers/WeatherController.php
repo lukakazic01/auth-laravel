@@ -33,9 +33,10 @@ class WeatherController extends Controller
         return redirect()->route('admin.dashboard')->with(['success' => 'You have successfully created a weather station.']);
     }
 
-    public function show(string $id)
+    public function show(WeatherModel $city)
     {
-        //
+        $city['temperature_in_next_5_days'] = [20, 30, 40, 50, 60];
+        return view('forecast.city', compact('city'));
     }
 
     public function edit(WeatherModel $city)

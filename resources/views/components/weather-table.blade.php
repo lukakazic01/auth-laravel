@@ -33,7 +33,11 @@
         <tbody>
         @forelse($cities as $city)
             <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ $city->city }}</td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    <a href="{{ route('show-city', $city->id) }}" class="font-bold underline">
+                        {{ $city->city }}
+                    </a>
+                </td>
                 <td class="px-6 py-4">{{ $city->temperature }}</td>
                 <td class="px-6 py-4">
                     <img
@@ -49,7 +53,7 @@
                 <td class="px-6 py-4">{{ $city->created_at->format('d/m/Y') }}</td>
                 @if ($isAdmin())
                     <td class="px-6 py-4">
-                        <div class="flex items-center ">
+                        <div class="flex items-center gap-2">
                             <a href="{{ route('admin.edit-city', $city->id) }}" class="font-medium text-blue-600 hover:underline">Edit</a>
                             <a href="#" class="font-medium text-red-600 hover:underline ms-3">Remove</a>
                         </div>
