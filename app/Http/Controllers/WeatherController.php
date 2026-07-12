@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\WeatherRequest;
+use App\Models\CityModel;
 use App\Models\WeatherModel;
 use Illuminate\Http\Request;
 
@@ -22,8 +23,12 @@ class WeatherController extends Controller
 
     public function store(WeatherRequest $request)
     {
+        $city = CityModel::query()->create([
+            'name' => $request->city,
+        ]);
+
         WeatherModel::query()->create([
-            'city' => $request->city,
+            'city_id' => $city->id,
             'temperature' => $request->temperature,
             'condition' => $request->condition,
             'chance_to_rain' => $request->chanceToRain,

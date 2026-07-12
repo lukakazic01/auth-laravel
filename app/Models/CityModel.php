@@ -12,6 +12,10 @@ use Illuminate\Database\Eloquent\Model;
 #[UseFactory(CityFactory::class)]
 #[Table('cities')]
 #[Fillable(['name'])]
+/**
+ * @property string $id
+ * @property string $name
+ */
 class CityModel extends Model
 {
     use HasFactory;
