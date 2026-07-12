@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends Factory<WeatherModel>
  */
-class WeatherModelFactory extends Factory
+class WeatherFactory extends Factory
 {
     /**
      * @return array<string, mixed>
@@ -16,7 +16,6 @@ class WeatherModelFactory extends Factory
     public function definition(): array
     {
         return [
-            'city' => fake()->unique()->city(),
             'temperature' => $this->faker->randomFloat(1, -50, 50),
             'condition' => fake()->randomElement(['Cloudy', 'Partly cloudy', 'Sunny', 'Rainy', 'Stormy']),
             'chance_to_rain' => fake()->numberBetween(0, 100),

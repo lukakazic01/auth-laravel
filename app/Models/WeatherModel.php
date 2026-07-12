@@ -3,18 +3,18 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Database\Factories\WeatherModelFactory;
+use Database\Factories\WeatherFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['city', 'temperature', 'humidity', 'condition', 'chance_to_rain', 'wind_speed'])]
+#[Fillable(['city_id', 'temperature', 'humidity', 'condition', 'chance_to_rain', 'wind_speed'])]
 #[Table('weather')]
-#[UseFactory(WeatherModelFactory::class)]
+#[UseFactory(WeatherFactory::class)]
 /**
- * @property string $city
+ * @property string $city_id
  * @property float $temperature
  * @property string $condition
  * @property integer $humidity
