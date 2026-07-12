@@ -7,7 +7,7 @@
                 name="city"
                 required
                 placeholder="Enter name of the city"
-                value="{{ old('city', $city->city) }}"
+                value="{{ old('city', $city->city->name) }}"
                 @class([
                     "border outline-none rounded p-2 dark:border-gray-200 dark:bg-white",
                     "border-red-500" => $errors->has('city')

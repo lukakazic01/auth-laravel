@@ -44,27 +44,30 @@ class WeatherController extends Controller
             ->with(['weather', 'forecasts'])
             ->where(['name' => mb_convert_case($cityName, MB_CASE_TITLE)])
             ->firstOrFail();
-
-        $city['temperature_in_next_5_days'] = [20, 30, 40, 50, 60];
         return view('forecast.city', compact('city'));
     }
 
-    public function edit(WeatherModel $city)
+    public function edit(string $cityId)
     {
+        $city = WeatherModel::query()->with('city')->where('city_id', $cityId)->firstOrFail();
         return view('admin.edit-city', compact('city'));
     }
 
-    public function update(WeatherRequest $request, WeatherModel $city)
+    public function update(WeatherRequest $request, string $cityId)
     {
+        $city = CityModel::query()->findOrFail($cityId);
         $city->update([
-            'city' => $request->city,
+            'name' => $request->city,
+        ]);
+
+        WeatherModel::query()->where('city_id', $cityId)->update([
             'temperature' => $request->temperature,
             'condition' => $request->condition,
             'chance_to_rain' => $request->chanceToRain,
             'humidity' => $request->humidity,
             'wind_speed' => $request->windSpeed,
         ]);
-        return redirect()->route('admin.dashboard')->with(['success' => "You successfully updated the city $city->city!"]);
+        return redirect()->route('admin.dashboard')->with(['success' => "You successfully updated the city $city->name!"]);
     }
 
     public function destroy(string $id)
