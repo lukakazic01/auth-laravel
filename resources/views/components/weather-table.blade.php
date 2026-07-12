@@ -34,7 +34,7 @@
         @forelse($cities as $city)
             <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    <a href="{{ route('show-city', $city->city->id) }}" class="font-bold underline">
+                    <a href="{{ route('show-city', $city->city->name) }}" class="font-bold underline">
                         {{ $city->city->name }}
                     </a>
                 </td>

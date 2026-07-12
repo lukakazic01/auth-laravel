@@ -12,7 +12,7 @@ class WeatherController extends Controller
 
     public function index()
     {
-        $cities = WeatherModel::all();
+        $cities = WeatherModel::query()->with('city')->get();
         return view('admin.index', compact('cities'));
     }
 
@@ -40,7 +40,11 @@ class WeatherController extends Controller
 
     public function show(string $cityName)
     {
-        $city = WeatherModel::query()->where(['city' => mb_convert_case($cityName, MB_CASE_TITLE)])->firstOrFail();
+        $city = CityModel::query()
+            ->with(['weather', 'forecasts'])
+            ->where(['name' => mb_convert_case($cityName, MB_CASE_TITLE)])
+            ->firstOrFail();
+
         $city['temperature_in_next_5_days'] = [20, 30, 40, 50, 60];
         return view('forecast.city', compact('city'));
     }
