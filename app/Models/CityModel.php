@@ -26,11 +26,13 @@ class CityModel extends Model
 {
     use HasFactory;
 
-    public function weather(): HasOne {
+    public function weather(): HasOne
+    {
         return $this->hasOne(WeatherModel::class, 'city_id');
     }
 
-    public function forecasts(): HasMany {
+    public function forecasts(): HasMany
+    {
         return $this->hasMany(ForecastModel::class, 'city_id');
     }
 }

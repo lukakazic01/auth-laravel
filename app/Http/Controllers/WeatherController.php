@@ -15,11 +15,6 @@ class WeatherController extends Controller
         return view('admin.index', compact('cities'));
     }
 
-    public function create()
-    {
-        return view('admin.create-city');
-    }
-
     public function store(WeatherRequest $request)
     {
         $city = CityModel::query()->create([
@@ -35,6 +30,11 @@ class WeatherController extends Controller
             'wind_speed' => $request->windSpeed,
         ]);
         return redirect()->route('admin.dashboard')->with(['success' => 'You have successfully created a weather station.']);
+    }
+
+    public function create()
+    {
+        return view('admin.create-city');
     }
 
     public function show(string $cityName)

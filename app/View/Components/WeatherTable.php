@@ -20,7 +20,8 @@ class WeatherTable extends Component
         //
     }
 
-    public function isAdmin(): bool {
+    public function isAdmin(): bool
+    {
         return auth()->check() && auth()->user()->role == 'admin';
     }
 
