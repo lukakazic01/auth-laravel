@@ -14,8 +14,11 @@ class WeatherRequest extends FormRequest
 
     public function rules(): array
     {
+        $isCreatingWeather = $this->isMethod('POST');
         return [
-            'city_id' => 'required|integer|exists:cities,id',
+            'city_id' => $isCreatingWeather
+                ? 'required|integer|exists:cities,id'
+                : 'sometimes|integer|exists:cities,id',
             'temperature' => 'required|decimal:1|max:200',
             'condition' => 'required|string|max:60',
             'chanceToRain' => 'required|integer|min:0|max:100',

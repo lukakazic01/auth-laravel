@@ -5,7 +5,6 @@
             @method('PATCH')
             <select
                 name="city_id"
-                required
                 class="border outline-none rounded p-2 dark:border-gray-200 dark:bg-white disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled
             >
