@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\CityModel;
 use App\Models\ForecastModel;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ForecastSeeder extends Seeder

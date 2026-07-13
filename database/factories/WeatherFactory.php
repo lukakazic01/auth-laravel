@@ -16,7 +16,7 @@ class WeatherFactory extends Factory
     public function definition(): array
     {
         return [
-            'temperature' => $this->faker->randomFloat(1, -50, 50),
+            'temperature' => fake()->randomFloat(1, -50, 50),
             'condition' => fake()->randomElement(['Cloudy', 'Partly cloudy', 'Sunny', 'Rainy', 'Stormy']),
             'chance_to_rain' => fake()->numberBetween(0, 100),
             'humidity' => fake()->numberBetween(0, 100),
