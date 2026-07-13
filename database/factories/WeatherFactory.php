@@ -13,11 +13,13 @@ class WeatherFactory extends Factory
     /**
      * @return array<string, mixed>
      */
+
     public function definition(): array
     {
+        $WEATHERS = array_keys(config('constants.weatherTypes'));
         return [
             'temperature' => fake()->randomFloat(1, -50, 50),
-            'condition' => fake()->randomElement(['Cloudy', 'Partly cloudy', 'Sunny', 'Rainy', 'Stormy']),
+            'condition' => fake()->randomElement($WEATHERS),
             'chance_to_rain' => fake()->numberBetween(0, 100),
             'humidity' => fake()->numberBetween(0, 100),
             'wind_speed' => fake()->numberBetween(1, 100),

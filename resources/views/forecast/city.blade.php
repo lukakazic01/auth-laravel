@@ -18,7 +18,7 @@
                         <p class="text-base text-gray-500 dark:text-gray-300 capitalize mt-1">{{ $city->weather->condition }}</p>
                     </div>
                     <img
-                        src="{{ config("constants.{$city->weather->condition}") }}"
+                        src="{{ config("constants.weatherTypes.{$city->weather->condition}") }}"
                         width="120"
                         height="120"
                         alt="{{ $city->weather->condition }}"

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Database\Factories\ForecastFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Table;
@@ -12,7 +13,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[UseFactory(ForecastFactory::class)]
 #[Table('forecasts')]
-#[Fillable(['temperature', 'date'])]
+#[Fillable(['temperature', 'date', 'weather_type', 'probability'])]
+/**
+ * @property integer $id
+ * @property float temperature
+ * @property Carbon date
+ * @property string weather_type
+ * @property integer probability
+ */
 class ForecastModel extends Model
 {
     /** @use HasFactory<ForecastFactory> */

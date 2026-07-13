@@ -41,7 +41,7 @@
                 <td class="px-6 py-4">{{ $city->temperature }}</td>
                 <td class="px-6 py-4">
                     <img
-                        src="{{ config("constants.$city->condition") }}"
+                        src="{{ config("constants.weatherTypes.$city->condition") }}"
                         width="64"
                         height="64"
                         alt="{{ $city->condition }}"

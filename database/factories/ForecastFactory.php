@@ -15,9 +15,12 @@ class ForecastFactory extends Factory
      */
     public function definition(): array
     {
+    $WEATHERS = array_keys(config('constants.weatherTypes'));
         return [
             'temperature' => fake()->randomFloat(1, -50, 50),
             'date' => fake()->dateTimeInInterval('now', '+1 day')->format('Y-m-d'),
+            'weather_type' => fake()->randomElement($WEATHERS),
+            'probability' => fake()->numberBetween(1, 100),
         ];
     }
 }
