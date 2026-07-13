@@ -49,7 +49,7 @@ class WeatherController extends Controller
     public function edit(string $cityId)
     {
         $city = WeatherModel::query()->with('city')->where('city_id', $cityId)->firstOrFail();
-        return view('admin.edit-city', compact('city'));
+        return view('admin.edit-weather', compact('city'));
     }
 
     public function update(WeatherRequest $request, string $cityId)

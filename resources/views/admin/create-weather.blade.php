@@ -38,11 +38,12 @@
                     "border-red-500" => $errors->has('condition')
                 ])
             >
+                <option @selected(old('condition') === 'Sunny')>Sunny</option>
                 <option @selected(old('condition') === 'Cloudy')>Cloudy</option>
                 <option @selected(old('condition') === 'Partly cloudy')>Partly cloudy</option>
-                <option @selected(old('condition') === 'Sunny')>Sunny</option>
                 <option @selected(old('condition') === 'Rainy')>Rainy</option>
                 <option @selected(old('condition') === 'Stormy')>Stormy</option>
+                <option @selected(old('condition') === 'Snowy')>Snowy</option>
             </select>
             @if ($errors->has('condition'))
                 <p class="text-red-500">{{ $errors->first('condition') }}</p>
