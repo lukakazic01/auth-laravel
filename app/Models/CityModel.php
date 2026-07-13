@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 #[Table('cities')]
 #[Fillable(['name'])]
 /**
- * @property string $id
+ * @property integer $id
  * @property string $name
  * @property Carbon $created_at
  * @property WeatherModel $weather
@@ -28,11 +28,11 @@ class CityModel extends Model
 
     public function weather(): HasOne
     {
-        return $this->hasOne(WeatherModel::class, 'city_id');
+        return $this->hasOne(WeatherModel::class, 'city_id', 'id');
     }
 
     public function forecasts(): HasMany
     {
-        return $this->hasMany(ForecastModel::class, 'city_id');
+        return $this->hasMany(ForecastModel::class, 'city_id', 'id');
     }
 }

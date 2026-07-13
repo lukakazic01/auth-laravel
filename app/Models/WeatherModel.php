@@ -30,6 +30,6 @@ class WeatherModel extends Model
 
     public function city(): BelongsTo
     {
-        return $this->belongsTo(CityModel::class);
+        return $this->belongsTo(CityModel::class, "city_id", "id");
     }
 }
