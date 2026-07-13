@@ -37,15 +37,6 @@ class WeatherController extends Controller
         return view('admin.create-weather');
     }
 
-    public function show(string $cityName)
-    {
-        $city = CityModel::query()
-            ->with(['weather', 'forecasts'])
-            ->where(['name' => mb_convert_case($cityName, MB_CASE_TITLE)])
-            ->firstOrFail();
-        return view('forecast.city', compact('city'));
-    }
-
     public function edit(string $cityId)
     {
         $city = WeatherModel::query()->with('city')->where('city_id', $cityId)->firstOrFail();
