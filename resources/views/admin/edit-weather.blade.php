@@ -1,6 +1,6 @@
 <x-layout>
     <div class="flex justify-center items-center grow">
-        <form method="POST" action="{{ route('admin.update-city', $city->id) }}" class="max-w-150 w-full flex flex-col gap-4">
+        <form method="POST" action="{{ route('admin.update-weather', $city->id) }}" class="max-w-150 w-full flex flex-col gap-4">
             @csrf
             @method('PATCH')
             <input
