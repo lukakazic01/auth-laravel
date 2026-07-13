@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[UseFactory(CityFactory::class)]
 #[Table('cities')]
@@ -25,9 +26,9 @@ class CityModel extends Model
 {
     use HasFactory;
 
-    public function weather(): HasMany
+    public function weather(): HasOne
     {
-        return $this->hasMany(WeatherModel::class, 'city_id', 'id');
+        return $this->hasOne(WeatherModel::class, 'city_id', 'id');
     }
 
     public function forecasts(): HasMany

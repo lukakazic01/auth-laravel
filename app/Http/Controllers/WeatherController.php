@@ -43,9 +43,7 @@ class WeatherController extends Controller
 
     public function update(WeatherRequest $request, WeatherModel $weather)
     {
-        $selectedCity = CityModel::query()->where(['id' => $request->city_id])->firstOrFail();
         $weather->update([
-            'city_id' => $selectedCity->id,
             'temperature' => $request->temperature,
             'condition' => $request->condition,
             'chance_to_rain' => $request->chanceToRain,
