@@ -53,8 +53,9 @@ class WeatherController extends Controller
         return redirect()->route('admin.dashboard')->with(['success' => "You successfully updated the weather!"]);
     }
 
-    public function destroy(string $id)
+    public function destroy(WeatherModel $weather)
     {
-        //
+        $weather->delete();
+        return redirect()->route('admin.dashboard')->with(['success' => "You successfully deleted the weather for a town {$weather->city->name}!"]);
     }
 }

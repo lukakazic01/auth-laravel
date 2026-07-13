@@ -55,7 +55,11 @@
                     <td class="px-6 py-4">
                         <div class="flex items-center gap-2">
                             <a href="{{ route('admin.edit-weather', $weather->id) }}" class="font-medium text-blue-600 hover:underline">Edit</a>
-                            <a href="#" class="font-medium text-red-600 hover:underline ms-3">Remove</a>
+                            <form action="{{ route('admin.destroy-weather', $weather->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="cursor-pointer font-medium text-red-600 hover:underline ms-3">Remove</button>
+                            </form>
                         </div>
                     </td>
                 @endif

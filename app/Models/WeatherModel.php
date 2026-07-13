@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[Table('weather')]
 #[UseFactory(WeatherFactory::class)]
 /**
+ * @property integer $id
  * @property CityModel $city
  * @property string $city_id
  * @property float $temperature
