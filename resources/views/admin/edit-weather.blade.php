@@ -6,8 +6,7 @@
             <select
                 name="city_id"
                 required
-                class="border outline-none rounded p-2 dark:border-gray-200 dark:bg-white disabled:opacity-20 disabled:cursor-not-allowed"
-                disabled
+                class="border outline-none rounded p-2 dark:border-gray-200 dark:bg-white"
             >
                 @foreach($cities as $city)
                     <option @selected($city->id === $weather->city_id) value="{{ $city->id }}">{{ $city->name }}</option>
