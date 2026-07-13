@@ -35,10 +35,9 @@ class WeatherController extends Controller
         return view('admin.create-weather', compact('cities'));
     }
 
-    public function edit(string $id)
+    public function edit(WeatherModel $weather)
     {
         $cities = CityModel::all();
-        $weather = WeatherModel::query()->with('city')->where(['id' => $id])->firstOrFail();
         return view('admin.edit-weather', compact('weather', 'cities'));
     }
 
