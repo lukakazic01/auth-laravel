@@ -34,7 +34,7 @@ class WeatherController extends Controller
 
     public function create()
     {
-        return view('admin.create-city');
+        return view('admin.create-weather');
     }
 
     public function show(string $cityName)

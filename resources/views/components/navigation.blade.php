@@ -11,7 +11,7 @@
                 <a href="{{ route('home') }}">Home</a>
                 @if (auth()->user()->role === 'admin')
                     <a href="{{ route('admin.dashboard') }}">Dashboard</a>
-                    <a href="{{ route('admin.create-city') }}">Create city</a>
+                    <a href="{{ route('admin.create-weather') }}">Create city</a>
                 @endif
             </div>
             <form method="POST" action="{{ route('logout') }}">

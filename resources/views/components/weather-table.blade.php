@@ -64,7 +64,7 @@
             <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                 <td colspan="8" class="text-center px-6 py-4">
                     Sorry, there is no any weather information currently,
-                    <a class="text-blue-400 underline font-bold" href="{{ route('admin.create-city') }}">add one.</a>
+                    <a class="text-blue-400 underline font-bold" href="{{ route('admin.create-weather') }}">add one.</a>
                 </td>
             </tr>
         @endforelse
