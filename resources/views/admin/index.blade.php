@@ -5,6 +5,6 @@
                 {{ session()->get('success') }}
             </div>
         @endif
-        <x-weather-table :cities="$cities" />
+        <x-weather-table :weathers="$weathers" />
     </div>
 </x-layout>

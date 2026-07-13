@@ -15,7 +15,7 @@ class WeatherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'city' => 'required|string|max:255|unique:cities,name',
+            'city_id' => 'required|integer|exists:cities,id',
             'temperature' => 'required|decimal:1|max:200',
             'condition' => 'required|string|max:60',
             'chanceToRain' => 'required|integer|min:0|max:100',

@@ -11,10 +11,10 @@ use Illuminate\View\Component;
 class WeatherTable extends Component
 {
     /**
-     * @param Collection<int, WeatherModel> $cities
+     * @param Collection<int, WeatherModel> $weathers
      */
     public function __construct(
-        public Collection $cities
+        public Collection $weathers
     )
     {
         //

@@ -1,28 +1,24 @@
 <x-layout>
     <div class="flex justify-center items-center grow">
-        <form method="POST" action="{{ route('admin.update-weather', $city->id) }}" class="max-w-150 w-full flex flex-col gap-4">
+        <form method="POST" action="{{ route('admin.update-weather', $weather->id) }}" class="max-w-150 w-full flex flex-col gap-4">
             @csrf
             @method('PATCH')
-            <input
-                name="city"
+            <select
+                name="city_id"
                 required
-                placeholder="Enter name of the city"
-                value="{{ old('city', $city->city->name) }}"
-                @class([
-                    "border outline-none rounded p-2 dark:border-gray-200 dark:bg-white",
-                    "border-red-500" => $errors->has('city')
-                ])
-            />
-            @if ($errors->has('city'))
-                <p class="text-red-500">{{ $errors->first('city') }}</p>
-            @endif
+                class="border outline-none rounded p-2 dark:border-gray-200 dark:bg-white"
+            >
+                @foreach($cities as $city)
+                    <option @selected($city->id === $weather->city_id) value="{{ $city->id }}">{{ $city->name }}</option>
+                @endforeach
+            </select>
             <input
                 name="temperature"
                 type="number"
                 step="0.1"
                 required
                 placeholder="Enter temperature..."
-                value="{{ old('temperature', $city->temperature) }}"
+                value="{{ old('temperature', $weather->temperature) }}"
                 @class([
                     "border outline-none rounded p-2 dark:border-gray-200 dark:bg-white",
                     "border-red-500" => $errors->has('temperature')
@@ -39,11 +35,11 @@
                     "border-red-500" => $errors->has('condition')
                 ])
             >
-                <option @selected(old('condition', $city->condition) === 'Cloudy')>Cloudy</option>
-                <option @selected(old('condition', $city->condition) === 'Partly cloudy')>Partly cloudy</option>
-                <option @selected(old('condition', $city->condition) === 'Sunny')>Sunny</option>
-                <option @selected(old('condition', $city->condition) === 'Rainy')>Rainy</option>
-                <option @selected(old('condition', $city->condition) === 'Stormy')>Stormy</option>
+                <option @selected(old('condition', $weather->condition) === 'Cloudy')>Cloudy</option>
+                <option @selected(old('condition', $weather->condition) === 'Partly cloudy')>Partly cloudy</option>
+                <option @selected(old('condition', $weather->condition) === 'Sunny')>Sunny</option>
+                <option @selected(old('condition', $weather->condition) === 'Rainy')>Rainy</option>
+                <option @selected(old('condition', $weather->condition) === 'Stormy')>Stormy</option>
             </select>
             @if ($errors->has('condition'))
                 <p class="text-red-500">{{ $errors->first('condition') }}</p>
@@ -53,7 +49,7 @@
                 type="number"
                 required
                 placeholder="Chance to rain"
-                value="{{  old('chanceToRain', $city->chance_to_rain) }}"
+                value="{{  old('chanceToRain', $weather->chance_to_rain) }}"
                 @class([
                     "border outline-none rounded p-2 dark:border-gray-200 dark:bg-white",
                     "border-red-500" => $errors->has('chanceToRain')
@@ -67,7 +63,7 @@
                 type="number"
                 required
                 placeholder="Enter humidity"
-                value="{{ old('humidity', $city->humidity) }}"
+                value="{{ old('humidity', $weather->humidity) }}"
                 @class([
                     "border outline-none rounded p-2 dark:border-gray-200 dark:bg-white",
                     "border-red-500" => $errors->has('humidity')
@@ -81,7 +77,7 @@
                 type="number"
                 required
                 placeholder="Enter wind speed"
-                value="{{ old('windSpeed', $city->wind_speed) }}"
+                value="{{ old('windSpeed', $weather->wind_speed) }}"
                 @class([
                     "border outline-none rounded p-2 dark:border-gray-200 dark:bg-white",
                     "border-red-500" => $errors->has('windSpeed')

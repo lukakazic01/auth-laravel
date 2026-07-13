@@ -2,19 +2,16 @@
     <div class="flex justify-center items-center grow">
         <form method="POST" action="{{ route('admin.store-weather') }}" class="max-w-150 w-full flex flex-col gap-4">
             @csrf
-            <input
-                name="city"
+            <select
+                name="city_id"
                 required
-                placeholder="Enter name of the city"
-                value="{{ old('city') }}"
-                @class([
-                    "border outline-none rounded p-2 dark:border-gray-200 dark:bg-white",
-                    "border-red-500" => $errors->has('city')
-                ])
-            />
-            @if ($errors->has('city'))
-                <p class="text-red-500">{{ $errors->first('city') }}</p>
-            @endif
+                class="border outline-none rounded p-2 dark:border-gray-200 dark:bg-white"
+            >
+                <option disabled selected>Select the city</option>
+                @foreach($cities as $city)
+                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                @endforeach
+            </select>
             <input
                 name="temperature"
                 type="number"

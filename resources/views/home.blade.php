@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
     <x-layout>
-        <x-weather-table :cities="$cities" />
+        <x-weather-table :weathers="$weathers" />
     </x-layout>
 </html>

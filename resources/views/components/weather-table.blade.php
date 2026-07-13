@@ -31,30 +31,30 @@
         </tr>
         </thead>
         <tbody>
-        @forelse($cities as $city)
+        @forelse($weathers as $weather)
             <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    <a href="{{ route('show-city', $city->city->name) }}" class="font-bold underline">
-                        {{ $city->city->name }}
+                    <a href="{{ route('show-city', $weather->city->name) }}" class="font-bold underline">
+                        {{ $weather->city->name }}
                     </a>
                 </td>
-                <td class="px-6 py-4">{{ $city->temperature }}</td>
+                <td class="px-6 py-4">{{ $weather->temperature }}</td>
                 <td class="px-6 py-4">
                     <img
-                        src="{{ config("constants.weatherTypes.$city->condition") }}"
+                        src="{{ config("constants.weatherTypes.$weather->condition") }}"
                         width="64"
                         height="64"
-                        alt="{{ $city->condition }}"
+                        alt="{{ $weather->condition }}"
                     />
                 </td>
-                <td class="px-6 py-4">{{ $city->chance_to_rain }}</td>
-                <td class="px-6 py-4">{{ $city->humidity }}</td>
-                <td class="px-6 py-4">{{ $city->wind_speed }}</td>
-                <td class="px-6 py-4">{{ $city->created_at->format('d/m/Y') }}</td>
+                <td class="px-6 py-4">{{ $weather->chance_to_rain }}</td>
+                <td class="px-6 py-4">{{ $weather->humidity }}</td>
+                <td class="px-6 py-4">{{ $weather->wind_speed }}</td>
+                <td class="px-6 py-4">{{ $weather->created_at->format('d/m/Y') }}</td>
                 @if ($isAdmin())
                     <td class="px-6 py-4">
                         <div class="flex items-center gap-2">
-                            <a href="{{ route('admin.edit-weather', $city->id) }}" class="font-medium text-blue-600 hover:underline">Edit</a>
+                            <a href="{{ route('admin.edit-weather', $weather->id) }}" class="font-medium text-blue-600 hover:underline">Edit</a>
                             <a href="#" class="font-medium text-red-600 hover:underline ms-3">Remove</a>
                         </div>
                     </td>

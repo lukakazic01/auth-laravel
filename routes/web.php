@@ -13,5 +13,5 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('/create-weather', [WeatherController::class, 'create'])->name('create-weather');
     Route::get('/{id}/edit-weather', [WeatherController::class, 'edit'])->name('edit-weather');
     Route::post('/store-weather', [WeatherController::class, 'store'])->name('store-weather');
-    Route::patch('/{id}/update-weather', [WeatherController::class, 'update'])->name('update-weather');
+    Route::patch('/{weather}/update-weather', [WeatherController::class, 'update'])->name('update-weather');
 });
