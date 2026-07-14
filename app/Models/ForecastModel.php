@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[UseFactory(ForecastFactory::class)]
 #[Table('forecasts')]
-#[Fillable(['temperature', 'date', 'weather_type', 'probability'])]
+#[Fillable(['temperature', 'date', 'weather_type', 'probability', 'city_id'])]
 /**
  * @property integer $id
  * @property float temperature
@@ -33,6 +33,9 @@ class ForecastModel extends Model
         ];
     }
 
+    /**
+     * @return BelongsTo<CityModel, ForecastModel>
+     */
     public function city(): BelongsTo
     {
         return $this->belongsTo(CityModel::class, "city_id", "id");

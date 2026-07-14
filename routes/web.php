@@ -22,5 +22,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
 
     Route::prefix('/forecast')->group(function () {
         Route::get('/create', [ForecastController::class, 'create'])->name('create-forecast');
+        Route::post('/store', [ForecastController::class, 'store'])->name('store-forecast');
     });
 });
