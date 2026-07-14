@@ -46,7 +46,7 @@
                         <p class="text-xs text-gray-400 mb-1">
                             {{ $forecast->date->format('d. M y') }}
                         </p>
-                        <div class="text-center">
+                        <div class="text-center dark:text-white">
                             {{ $forecast->temperature }} C&#176;
                         </div>
                     </div>

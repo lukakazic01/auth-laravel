@@ -10,9 +10,12 @@ Route::redirect('/prognoza', '/');
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [WeatherController::class, 'index'])->name('dashboard');
-    Route::get('/create-weather', [WeatherController::class, 'create'])->name('create-weather');
-    Route::get('/{weather}/edit-weather', [WeatherController::class, 'edit'])->name('edit-weather');
-    Route::post('/store-weather', [WeatherController::class, 'store'])->name('store-weather');
-    Route::patch('/{weather}/update-weather', [WeatherController::class, 'update'])->name('update-weather');
-    Route::delete('/{weather}/destroy', [WeatherController::class, 'destroy'])->name('destroy-weather');
+
+    Route::prefix('/weather')->group(function () {
+        Route::get('/create', [WeatherController::class, 'create'])->name('create-weather');
+        Route::get('/{weather}/edit', [WeatherController::class, 'edit'])->name('edit-weather');
+        Route::post('/store-weather', [WeatherController::class, 'store'])->name('store-weather');
+        Route::patch('/{weather}/update', [WeatherController::class, 'update'])->name('update-weather');
+        Route::delete('/{weather}/destroy', [WeatherController::class, 'destroy'])->name('destroy-weather');
+    });
 });
