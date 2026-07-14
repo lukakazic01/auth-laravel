@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WeatherController::class, 'index'])->middleware('auth')->name('home');
 Route::get('/forecast/{city}', [ForecastController::class, 'show'])->middleware('auth')->name('show-city');
+Route::get('/forecasts', [ForecastController::class, 'index'])->middleware('auth')->name('forecasts');
 Route::redirect('/prognoza', '/');
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
@@ -17,5 +18,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
         Route::post('/store-weather', [WeatherController::class, 'store'])->name('store-weather');
         Route::patch('/{weather}/update', [WeatherController::class, 'update'])->name('update-weather');
         Route::delete('/{weather}/destroy', [WeatherController::class, 'destroy'])->name('destroy-weather');
+    });
+
+    Route::prefix('/forecast')->group(function () {
+        Route::get('/create', [ForecastController::class, 'create'])->name('create-forecast');
     });
 });

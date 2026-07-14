@@ -32,13 +32,13 @@ class WeatherController extends Controller
     public function create()
     {
         $cities = CityModel::all();
-        return view('admin.create-weather', compact('cities'));
+        return view('admin.weather.create', compact('cities'));
     }
 
     public function edit(WeatherModel $weather)
     {
         $cities = CityModel::all();
-        return view('admin.edit-weather', compact('weather', 'cities'));
+        return view('admin.weather.edit', compact('weather', 'cities'));
     }
 
     public function update(WeatherRequest $request, WeatherModel $weather)
