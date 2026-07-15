@@ -35,11 +35,9 @@
                     "border-red-500" => $errors->has('condition')
                 ])
             >
-                <option @selected(old('condition', $weather->condition) === 'Cloudy')>Cloudy</option>
-                <option @selected(old('condition', $weather->condition) === 'Partly cloudy')>Partly cloudy</option>
-                <option @selected(old('condition', $weather->condition) === 'Sunny')>Sunny</option>
-                <option @selected(old('condition', $weather->condition) === 'Rainy')>Rainy</option>
-                <option @selected(old('condition', $weather->condition) === 'Stormy')>Stormy</option>
+                @foreach(array_keys(config('constants.weatherTypes')) as $weatherType)
+                    <option @selected(old('condition', $weather->condition) === $weatherType)>{{ $weatherType }}</option>
+                @endforeach
             </select>
             @if ($errors->has('condition'))
                 <p class="text-red-500">{{ $errors->first('condition') }}</p>
