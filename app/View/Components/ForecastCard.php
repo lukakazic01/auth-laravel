@@ -26,4 +26,13 @@ class ForecastCard extends Component
     {
         return view('components.forecast-card');
     }
+
+    public static function temperatureColor($temperature): string {
+        return match(true) {
+            $temperature < 1 => 'text-blue-800 dark:text-blue-800',
+            $temperature >= 1 && $temperature < 15 => 'text-blue-500 dark:text-blue-500',
+            $temperature >= 15 && $temperature <= 25 => 'text-green-500 dark:text-green-500',
+            $temperature > 25 => 'text-red-500 dark:text-red-500',
+        };
+    }
 }
