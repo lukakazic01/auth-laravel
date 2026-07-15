@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminForecastController;
 use App\Http\Controllers\ForecastController;
 use App\Http\Controllers\WeatherController;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     });
 
     Route::prefix('/forecast')->group(function () {
-        Route::get('/create', [ForecastController::class, 'create'])->name('create-forecast');
-        Route::post('/store', [ForecastController::class, 'store'])->name('store-forecast');
+        Route::get('/', [AdminForecastController::class, 'index'])->name('forecasts');
+        Route::get('/create', [AdminForecastController::class, 'create'])->name('create-forecast');
+        Route::post('/store', [AdminForecastController::class, 'store'])->name('store-forecast');
     });
 });

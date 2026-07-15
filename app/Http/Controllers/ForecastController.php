@@ -23,28 +23,4 @@ class ForecastController extends Controller
             ->firstOrFail();
         return view('forecast.city', compact('city'));
     }
-
-    public function create () {
-        $cities = CityModel::all();
-        return view('admin.forecast.create', compact('cities'));
-    }
-
-    public function store(Request $request) {
-        $request->validate([
-            'city_id' => 'required|integer|exists:cities,id',
-            'temperature' => 'required|numeric|between:-50,60|decimal:1',
-            'weather_type' => 'required|string|max:60',
-            'probability' => 'required|integer|between:0,100',
-            'date' => ['required', Rule::date()->format("Y-m-d")->afterOrEqual('today')],
-        ]);
-        ForecastModel::query()->create([
-            'city_id' => $request->city_id,
-            'temperature' => $request->temperature,
-            'weather_type' => $request->weather_type,
-            'probability' => $request->weahter_type === 'Sunny' ? $request->probability : null,
-            'date' => $request->date,
-        ]);
-        $city = CityModel::query()->findOrFail($request->city_id);
-        return redirect()->route('forecasts')->with(['success' => "Successfully create forecast for city $city->name"]);
-    }
 }
