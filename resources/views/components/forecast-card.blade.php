@@ -17,11 +17,11 @@
                         {{ $forecast->date->format('Y/m/d') }}
                     </span>
                     <span @class([
-                        'text-base font-medium text-gray-900 dark:text-gray-400',
-                        'text-blue-400! dark:text-blue-400!' => $forecast->temperature < 0,
-                        'text-blue-700! dark:text-blue-700!' => $forecast->temperature >= 1 && $forecast->temperature < 15,
-                        'text-green-500! dark:text-green-500!' => $forecast->temperature >= 15 && $forecast->temperature <= 25,
-                        'text-red-500! dark:text-red-500!' => $forecast->temperature > 25,
+                        'text-base font-medium',
+                        'text-blue-400 dark:text-blue-400' => $forecast->temperature < 1,
+                        'text-blue-700 dark:text-blue-700' => $forecast->temperature >= 1 && $forecast->temperature < 15,
+                        'text-green-500 dark:text-green-500' => $forecast->temperature >= 15 && $forecast->temperature <= 25,
+                        'text-red-500 dark:text-red-500' => $forecast->temperature > 25,
                     ])>
                         {{ $forecast->temperature }}°C
                     </span>
