@@ -14,48 +14,4 @@ class WeatherController extends Controller
         $weathers = WeatherModel::query()->with('city')->get();
         return view('admin.index', compact('weathers'));
     }
-
-    public function store(WeatherRequest $request)
-    {
-        $city = CityModel::query()->where(['id' => $request->city_id])->firstOrFail();
-        WeatherModel::query()->create([
-            'city_id' => $city->id,
-            'temperature' => $request->temperature,
-            'condition' => $request->condition,
-            'chance_to_rain' => $request->chanceToRain,
-            'humidity' => $request->humidity,
-            'wind_speed' => $request->windSpeed,
-        ]);
-        return redirect()->route('admin.dashboard')->with(['success' => 'You have successfully created a weather station.']);
-    }
-
-    public function create()
-    {
-        $cities = CityModel::all();
-        return view('admin.weather.create', compact('cities'));
-    }
-
-    public function edit(WeatherModel $weather)
-    {
-        $cities = CityModel::all();
-        return view('admin.weather.edit', compact('weather', 'cities'));
-    }
-
-    public function update(WeatherRequest $request, WeatherModel $weather)
-    {
-        $weather->update([
-            'temperature' => $request->temperature,
-            'condition' => $request->condition,
-            'chance_to_rain' => $request->chanceToRain,
-            'humidity' => $request->humidity,
-            'wind_speed' => $request->windSpeed,
-        ]);
-        return redirect()->route('admin.dashboard')->with(['success' => "You successfully updated the weather!"]);
-    }
-
-    public function destroy(WeatherModel $weather)
-    {
-        $weather->delete();
-        return redirect()->route('admin.dashboard')->with(['success' => "You successfully deleted the weather for a town {$weather->city->name}!"]);
-    }
 }
