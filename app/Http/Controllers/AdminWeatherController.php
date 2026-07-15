@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class AdminWeatherController extends Controller
 {
+    public function index()
+    {
+        $weathers = WeatherModel::query()->with('city')->get();
+        return view('admin.index', compact('weathers'));
+    }
+
     public function store(WeatherRequest $request)
     {
         $city = CityModel::query()->where(['id' => $request->city_id])->firstOrFail();

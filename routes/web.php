@@ -12,9 +12,9 @@ Route::get('/forecasts', [ForecastController::class, 'index'])->middleware('auth
 Route::redirect('/prognoza', '/');
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
-    Route::get('/', [WeatherController::class, 'index'])->name('dashboard');
 
     Route::prefix('/weather')->group(function () {
+        Route::get('/', [AdminWeatherController::class, 'index'])->name('dashboard');
         Route::get('/create', [AdminWeatherController::class, 'create'])->name('create-weather');
         Route::get('/{weather}/edit', [AdminWeatherController::class, 'edit'])->name('edit-weather');
         Route::post('/store-weather', [AdminWeatherController::class, 'store'])->name('store-weather');
