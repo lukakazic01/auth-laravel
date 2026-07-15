@@ -18,6 +18,10 @@ class ForecastSeeder extends Seeder
                     'city_id' => $city->id,
                     'date' => now()->addDays($i + 1)->format('Y-m-d'),
                 ]);
+                $range = config("constants.temperatureRangesByWeatherType.$forecast->weather_type") ?? null;
+                if ($range) {
+                    $forecast->temperature = fake()->randomFloat(1, $range[0], $range[1]);
+                }
                 if ($forecast->weather_type === 'Sunny') {
                     $forecast->probability = null;
                 }
