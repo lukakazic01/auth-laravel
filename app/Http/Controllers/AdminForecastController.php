@@ -10,7 +10,9 @@ use Illuminate\Validation\Rule;
 class AdminForecastController extends Controller
 {
     public function index() {
-        $cities = CityModel::query()->with('forecasts')->get();
+        $cities = CityModel::query()->with('forecasts', function ($query) {
+            $query->orderBy('date', 'asc');
+        })->get();
         return view('admin.forecast.index', compact('cities'));
     }
 
@@ -24,7 +26,7 @@ class AdminForecastController extends Controller
             'city_id' => 'required|integer|exists:cities,id',
             'temperature' => 'required|numeric|between:-50,60|decimal:1',
             'weather_type' => 'required|string|max:60',
-            'probability' => 'required|integer|between:0,100',
+            'probability' => 'sometimes|integer|between:0,100',
             'date' => ['required', Rule::date()->format("Y-m-d")->afterOrEqual('today')],
         ]);
         ForecastModel::query()->create([

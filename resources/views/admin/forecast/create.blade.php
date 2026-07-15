@@ -48,7 +48,6 @@
             <input
                 name="probability"
                 type="number"
-                required
                 placeholder="Enter probability"
                 value="{{ old('probability') }}"
                 @class([
