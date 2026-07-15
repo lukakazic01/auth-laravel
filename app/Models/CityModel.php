@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $name
  * @property Carbon $created_at
  * @property WeatherModel $weather
- * @property ForecastModel $forecasts
+ * @property ForecastModel[] $forecasts
  */
 class CityModel extends Model
 {

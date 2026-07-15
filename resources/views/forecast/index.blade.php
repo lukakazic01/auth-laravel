@@ -7,16 +7,16 @@
             </div>
         @endif
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 w-full">
-            @foreach($forecasts as $cityName => $cityForecasts)
+            @foreach($cities as $city)
                 <section class="bg-mauve-100 dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-5">
                     <h2 class="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center justify-between">
-                        {{ $cityName }}
+                        {{ $city->name }}
                         <span class="text-xs font-normal text-gray-400 dark:text-gray-500">
-                            {{ count($cityForecasts) }} {{ count($cityForecasts) > 1 ? 'entries' : 'entry' }}
+                            {{ count($city->forecasts) }} {{ count($city->forecasts) > 1 ? 'entries' : 'entry' }}
                         </span>
                     </h2>
                     <ul class="space-y-2">
-                        @foreach($cityForecasts as $forecast)
+                        @foreach($city->forecasts as $forecast)
                             <li class="flex flex-col rounded-lg bg-mauve-300 dark:bg-gray-700/60 px-3 py-2">
                                 <p class="flex justify-between items-center">
                                     <img width="30" height="30" alt="{{ $forecast->weather_type }}" src="{{ config("constants.weatherTypes.$forecast->weather_type") }}" />

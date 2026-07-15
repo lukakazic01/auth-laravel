@@ -11,9 +11,8 @@ class ForecastController extends Controller
 {
 
     public function index() {
-        $forecasts = ForecastModel::query()->with('city')->get();
-        $groupedByName = $forecasts->groupBy('city.name');
-        return view('forecast.index', ['forecasts' => $groupedByName]);
+        $cities = CityModel::query()->with('forecasts')->get();
+        return view('forecast.index', compact('cities'));
     }
 
     public function show(string $cityName)
