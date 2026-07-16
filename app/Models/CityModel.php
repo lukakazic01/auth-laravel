@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property Carbon $created_at
  * @property WeatherModel $weather
  * @property ForecastModel[] $forecasts
+ * @property ForecastModel $todaysForecast
  */
 class CityModel extends Model
 {
@@ -34,5 +35,11 @@ class CityModel extends Model
     public function forecasts(): HasMany
     {
         return $this->hasMany(ForecastModel::class, 'city_id', 'id');
+    }
+
+    public function todaysForecast(): HasOne {
+        return $this
+            ->hasOne(ForecastModel::class, "city_id", "id")
+            ->whereDate('date', now());
     }
 }

@@ -18,7 +18,7 @@ class ForecastSeeder extends Seeder
             for($i = 0; $i < 30; $i++) {
                 $forecast = ForecastModel::factory()->make([
                     'city_id' => $city->id,
-                    'date' => now()->addDays($i + 1)->format('Y-m-d'),
+                    'date' => now()->addDays($i)->format('Y-m-d'),
                 ]);
                 if ($lastTemperature === null) {
                     $range = config("constants.temperatureRangesByWeatherType.$forecast->weather_type") ?? null;

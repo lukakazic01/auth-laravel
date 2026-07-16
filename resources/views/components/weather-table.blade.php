@@ -34,7 +34,7 @@
         @forelse($weathers as $weather)
             <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
                 <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    <a href="{{ route('show-city', $weather->city->name) }}" class="font-bold underline">
+                    <a href="{{ route('show-forecast', $weather->city->name) }}" class="font-bold underline">
                         {{ $weather->city->name }}
                     </a>
                 </td>

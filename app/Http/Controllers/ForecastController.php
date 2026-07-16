@@ -26,7 +26,7 @@ class ForecastController extends Controller
 
     public function search(Request $request) {
         $search = $request->query('search');
-        $cities = CityModel::query()->whereLike('name', "%$search%")->get();
+        $cities = CityModel::query()->whereLike('name', "%$search%")->with('todaysForecast')->get();
         if ($cities->isEmpty()) {
             return redirect()->route('home')->with(['message' => "There is no town '$search' matching our records, try with different value"]);
         }

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'home')->middleware('auth')->name('home');
 
 Route::get('/forecast/search', [ForecastController::class, 'search'])->middleware('auth')->name('forecasts-search');
-Route::get('/forecast/{city}', [ForecastController::class, 'show'])->middleware('auth')->name('show-city');
+Route::get('/forecast/{city}', [ForecastController::class, 'show'])->middleware('auth')->name('show-forecast');
 Route::get('/forecasts', [ForecastController::class, 'index'])->middleware('auth')->name('forecasts');
 
 Route::redirect('/prognoza', '/');
