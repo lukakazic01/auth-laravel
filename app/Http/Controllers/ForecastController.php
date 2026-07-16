@@ -23,4 +23,13 @@ class ForecastController extends Controller
             ->firstOrFail();
         return view('forecast.city', compact('city'));
     }
+
+    public function search(Request $request) {
+        $search = $request->query('search');
+        $cities = CityModel::query()->whereLike('name', "%$search%")->get();
+        if ($cities->isEmpty()) {
+            return redirect()->route('home')->with(['message' => "There is no town '$search' matching our records, try with different value"]);
+        }
+       return view('forecast.search', compact('cities'));
+    }
 }

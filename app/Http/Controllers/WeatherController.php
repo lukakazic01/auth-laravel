@@ -12,6 +12,6 @@ class WeatherController extends Controller
     public function index()
     {
         $weathers = WeatherModel::query()->with('city')->get();
-        return view('admin.index', compact('weathers'));
+        return view('home', compact('weathers'));
     }
 }

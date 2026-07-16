@@ -18,7 +18,7 @@ class ForecastFactory extends Factory
     $WEATHERS = array_keys(config('constants.weatherTypes'));
         return [
             'temperature' => fake()->randomFloat(1, -50, 50),
-            'date' => fake()->dateTimeInInterval('now', '+1 day')->format('Y-m-d'),
+            'date' => fake()->dateTimeInInterval('now', '+30 days')->format('Y-m-d'),
             'weather_type' => fake()->randomElement($WEATHERS),
             'probability' => fake()->numberBetween(1, 100),
         ];

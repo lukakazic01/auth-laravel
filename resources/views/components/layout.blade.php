@@ -16,7 +16,7 @@
 </head>
 <body class="min-h-screen flex flex-col">
     <x-navigation />
-    <div class="flex grow bg-white dark:bg-slate-500">
+    <div class="flex grow bg-white dark:bg-gray-900">
         {{ $slot }}
     </div>
 </body>

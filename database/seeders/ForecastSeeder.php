@@ -15,7 +15,7 @@ class ForecastSeeder extends Seeder
         $cities = CityModel::all();
         $lastTemperature = null;
         foreach($cities as $city) {
-            for($i = 0; $i < 5; $i++) {
+            for($i = 0; $i < 30; $i++) {
                 $forecast = ForecastModel::factory()->make([
                     'city_id' => $city->id,
                     'date' => now()->addDays($i + 1)->format('Y-m-d'),
