@@ -17,7 +17,7 @@
                     <form action="{{ route('user-favorite', $city->id) }}" method="POST" class="flex justify-end">
                         @csrf
                         <button class="text-lg transition-colors cursor-pointer w-fit bg-mauve-100 dark:bg-gray-600 rounded-tr rounded-tl p-0.5">
-                            <i class="{{ $city->isFavorited ? 'fa-solid' : 'fa-regular' }} fa-heart dark:text-gray-400 text-mauve-400"></i>
+                            <i class="{{ $city->is_favorite ? 'fa-solid' : 'fa-regular' }} fa-heart text-red-500"></i>
                         </button>
                     </form>
                     <div class="p-4 relative bg-mauve-100 dark:bg-gray-600 rounded rounded-tr-none">
