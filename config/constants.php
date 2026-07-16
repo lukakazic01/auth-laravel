@@ -10,7 +10,7 @@ return [
         'Sleet' => 'https://cdn.meteocons.com/3.0.0-next.10/svg/fill/sleet.svg'
     ],
     'temperatureRangesByWeatherType' => [
-        'Cloudy' => [-50, 15],
+        'Cloudy' => [-50, 15], // min,max
         'Partly cloudy' => [-50, 25],
         'Rainy' => [-10, 50],
         'Snowy' => [-50, 1],
