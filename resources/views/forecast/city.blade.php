@@ -12,21 +12,22 @@
                     </div>
                 </div>
 
+            @if($city->weather)
                 <div class="flex items-center justify-between mt-4">
-                    <div>
-                        <span class="text-4xl font-bold text-gray-900 dark:text-white">{{ $city->weather->temperature }}°</span>
-                        <p class="text-base text-gray-500 dark:text-gray-300 capitalize mt-1">{{ $city->weather->condition }}</p>
+                        <div>
+                            <span class="text-4xl font-bold text-gray-900 dark:text-white">{{ $city->weather->temperature }}°</span>
+                            <p class="text-base text-gray-500 dark:text-gray-300 capitalize mt-1">{{ $city->weather->condition }}</p>
+                        </div>
+                        <img
+                            src="{{ config("constants.weatherTypes.{$city->weather->condition}") }}"
+                            width="120"
+                            height="120"
+                            alt="{{ $city->weather->condition }}"
+                        />
                     </div>
-                    <img
-                        src="{{ config("constants.weatherTypes.{$city->weather->condition}") }}"
-                        width="120"
-                        height="120"
-                        alt="{{ $city->weather->condition }}"
-                    />
                 </div>
-            </div>
 
-            <div class="grid grid-cols-3 divide-x divide-gray-100 dark:divide-gray-700 border-t border-gray-100 dark:border-gray-700">
+                <div class="grid grid-cols-3 divide-x divide-gray-100 dark:divide-gray-700 border-t border-gray-100 dark:border-gray-700">
                 <div class="px-4 py-4 text-center">
                     <p class="text-sm text-gray-400 dark:text-gray-400 mb-1">Rain</p>
                     <p class="font-semibold text-gray-900 dark:text-white">{{ $city->weather->chance_to_rain }}%</p>
@@ -40,15 +41,21 @@
                     <p class="font-semibold text-gray-900 dark:text-white">{{ $city->weather->wind_speed }} km/h</p>
                 </div>
             </div>
+            @else
+                <div class="text-sm dark:text-white text-gray-500 py-4">
+                    Currently, there is no record of the today's weather for this town
+                </div>
+            @endif
             <div class="grid grid-cols-5 divide-x divide-gray-100 dark:divide-gray-700 border-t border-gray-100 dark:border-gray-700">
                 @foreach($city->forecasts as $forecast)
-                    <div class="flex flex-col p-2 items-center">
-                        <p class="text-xs text-gray-400 mb-1">
+                    <div class="flex flex-col p-2 items-center relative">
+                        <p class="text-xs font-bold text-gray-400 mb-1">
                             {{ $forecast->date->format('d. M y') }}
                         </p>
-                        <div class="text-center dark:text-white">
-                            {{ $forecast->temperature }} C&#176;
+                        <div class="text-center text-xs dark:text-white">
+                            {{ $forecast?->temperature ?? '/' }} C&#176;
                         </div>
+                        <img class="" width="30" height="30" src="{{ config("constants.weatherTypes.$forecast->weather_type") }}" />
                     </div>
                 @endforeach
             </div>
