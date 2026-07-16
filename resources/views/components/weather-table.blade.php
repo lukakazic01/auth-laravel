@@ -1,6 +1,6 @@
 <div class="relative overflow-x-auto shadow-sm rounded-lg border border-gray-200 dark:border-0">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-        <thead class="text-sm text-gray-700 dark:text-white bg-gray-100 dark:bg-gray-700 border-b border-gray-300 dark:border-b-0">
+        <thead class="text-sm text-gray-700 dark:text-white bg-gray-100 dark:bg-gray-800 border-b border-gray-300 dark:border-b-0">
         <tr>
             <th scope="col" class="px-6 py-3 font-medium">
                 City
@@ -32,8 +32,8 @@
         </thead>
         <tbody>
         @forelse($weathers as $weather)
-            <tr class="bg-white border-b border-gray-200 hover:bg-gray-50">
-                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+            <tr class="bg-white transition-colors dark:bg-gray-700 border-b border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-500 dark:text-white dark:border-gray-500">
+                <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                     <a href="{{ route('show-forecast', $weather->city->name) }}" class="font-bold underline">
                         {{ $weather->city->name }}
                     </a>
