@@ -12,7 +12,7 @@ return [
     'temperatureRangesByWeatherType' => [
         'Cloudy' => [-50, 15], // min,max
         'Partly cloudy' => [-50, 25],
-        'Rainy' => [-10, 50],
+        'Rainy' => [-10, 25],
         'Snowy' => [-50, 1],
         'Stormy' => [-50, 25],
         'Sleet' => [-2, 3],
