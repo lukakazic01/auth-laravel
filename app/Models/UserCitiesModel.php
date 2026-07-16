@@ -10,5 +10,5 @@ use Illuminate\Database\Eloquent\Model;
 #[Fillable(['user_id', 'city_id'])]
 class UserCitiesModel extends Model
 {
-    //
+
 }
