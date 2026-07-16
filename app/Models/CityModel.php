@@ -34,7 +34,7 @@ class CityModel extends Model
 
     public function forecasts(): HasMany
     {
-        return $this->hasMany(ForecastModel::class, 'city_id', 'id');
+        return $this->hasMany(ForecastModel::class, 'city_id', 'id')->orderBy('date');
     }
 
     public function todaysForecast(): HasOne {

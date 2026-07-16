@@ -29,5 +29,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
         Route::get('/', [AdminForecastController::class, 'index'])->name('forecasts');
         Route::get('/create', [AdminForecastController::class, 'create'])->name('create-forecast');
         Route::post('/store', [AdminForecastController::class, 'store'])->name('store-forecast');
+        Route::delete('/{forecast}/destroy', [AdminForecastController::class, 'destroy'])->name('destroy-forecast');
     });
 });

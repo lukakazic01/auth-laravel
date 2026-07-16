@@ -10,9 +10,7 @@ use Illuminate\Validation\Rule;
 class AdminForecastController extends Controller
 {
     public function index() {
-        $cities = CityModel::query()->with('forecasts', function ($query) {
-            $query->orderBy('date', 'asc');
-        })->get();
+        $cities = CityModel::query()->with('forecasts')->get();
         return view('admin.forecast.index', compact('cities'));
     }
 
@@ -38,5 +36,10 @@ class AdminForecastController extends Controller
         ]);
         $city = CityModel::query()->findOrFail($request->city_id);
         return redirect()->route('admin.forecasts')->with(['success' => "Successfully created forecast for city $city->name"]);
+    }
+
+    public function destroy (Request $request, ForecastModel $forecast) {
+        $forecast->delete();
+        return redirect()->route('admin.forecasts')->with(['success' => "Successfully deleted forecast"]);
     }
 }

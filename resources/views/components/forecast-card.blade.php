@@ -8,12 +8,11 @@
     </h2>
     <ul class="space-y-2">
         @foreach($city->forecasts as $forecast)
-            <li class="flex flex-col rounded-lg bg-mauve-300 dark:bg-gray-700/60 px-3 py-2">
+            <li class="flex relative flex-col rounded-lg bg-mauve-300 dark:bg-gray-700/60 px-3 py-2">
                 <p class="flex justify-between items-center">
                     <img width="30" height="30" alt="{{ $forecast->weather_type }}"
                          src="{{ config("constants.weatherTypes.$forecast->weather_type") }}"/>
-                    <span
-                        class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ $forecast->weather_type }}</span>
+                    <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ $forecast->weather_type }}</span>
                 </p>
                 <p class="flex justify-between items-center">
                     <span class="text-sm text-gray-500 dark:text-gray-400">
@@ -23,6 +22,16 @@
                         {{ $forecast->temperature }}°C
                     </span>
                 </p>
+                @if (auth()->user()->role === "admin")
+                    <form method="POST" action="{{ route('admin.destroy-forecast', $forecast->id) }}" class="w-full flex justify-end items-center border-gray-400/20 dark:border-gray-500/30 border-t mt-2 pt-2">
+                        @csrf
+                        @method('DELETE')
+                        <button class="flex cursor-pointer items-center gap-1 text-xs text-gray-400 hover:text-red-500 transition-colors">
+                            <i class="fa fa-remove"></i>
+                            Delete
+                        </button>
+                    </form>
+                @endif
             </li>
         @endforeach
     </ul>
