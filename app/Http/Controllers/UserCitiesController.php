@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\CityModel;
 use App\Models\UserCitiesModel;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class UserCitiesController extends Controller
 {
+    public function index() {
+        $userFavorites = auth()->user()->cityFavorites;
+        return view('home', compact('userFavorites'));
+    }
 
     public function favorite(Request $request, CityModel $city) {
         if (!auth()->check()) {
