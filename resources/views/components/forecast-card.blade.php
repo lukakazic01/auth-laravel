@@ -22,7 +22,7 @@
                         {{ $forecast->temperature }}°C
                     </span>
                 </p>
-                @if (auth()->user()->role === "admin")
+                @if (auth()->user()?->role === "admin")
                     <form method="POST" action="{{ route('admin.destroy-forecast', $forecast->id) }}" class="w-full flex justify-end items-center border-gray-400/20 dark:border-gray-500/30 border-t mt-2 pt-2">
                         @csrf
                         @method('DELETE')

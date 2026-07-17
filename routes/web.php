@@ -7,13 +7,13 @@ use App\Http\Controllers\UserCitiesController;
 use App\Http\Controllers\WeatherController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'home')->middleware('auth')->name('home');
+Route::view('/', 'home')->name('home');
 
-Route::get('/forecast/search', [ForecastController::class, 'search'])->middleware('auth')->name('forecasts-search');
-Route::get('/forecast/{city}', [ForecastController::class, 'show'])->middleware('auth')->name('show-forecast');
-Route::get('/forecasts', [ForecastController::class, 'index'])->middleware('auth')->name('forecasts');
+Route::get('/forecast/search', [ForecastController::class, 'search'])->name('forecasts-search');
+Route::get('/forecast/{city}', [ForecastController::class, 'show'])->name('show-forecast');
+Route::get('/forecasts', [ForecastController::class, 'index'])->name('forecasts');
 
-Route::post('/user-cities/favorite/{city}', [UserCitiesController::class, 'favorite'])->middleware('auth')->name('user-favorite');
+Route::post('/user-cities/favorite/{city}', [UserCitiesController::class, 'favorite'])->name('user-favorite');
 
 Route::redirect('/prognoza', '/');
 
