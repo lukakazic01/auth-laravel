@@ -7,7 +7,13 @@ use App\Http\Controllers\UserCitiesController;
 use App\Http\Controllers\WeatherController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [UserCitiesController::class, 'index'])->name('home');
+Route::get('/', function() {
+    $userFavorites = [];
+    if(auth()->check()) {
+        $userFavorites = auth()->user()->withCityFavorites();
+    }
+    return view('home', compact('userFavorites'));
+})->name('home');
 
 Route::get('/forecast/search', [ForecastController::class, 'search'])->name('forecasts-search');
 Route::get('/forecast/{city}', [ForecastController::class, 'show'])->name('show-forecast');

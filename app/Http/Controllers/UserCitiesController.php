@@ -8,13 +8,6 @@ use Illuminate\Http\Request;
 
 class UserCitiesController extends Controller
 {
-    public function index() {
-        $userFavorites = [];
-        if(auth()->check()) {
-            $userFavorites = auth()->user()->withCityFavorites();
-        }
-        return view('home', compact('userFavorites'));
-    }
 
     public function toggleFavorite(Request $request, CityModel $city) {
         if (!auth()->check()) {
