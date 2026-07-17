@@ -9,7 +9,10 @@ use Illuminate\Http\Request;
 class UserCitiesController extends Controller
 {
     public function index() {
-        $userFavorites = auth()->user()->withCityFavorites();
+        $userFavorites = [];
+        if(auth()->check()) {
+            $userFavorites = auth()->user()->withCityFavorites();
+        }
         return view('home', compact('userFavorites'));
     }
 

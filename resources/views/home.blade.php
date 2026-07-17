@@ -19,12 +19,18 @@
                 </div>
             </div>
             <div class="flex flex-col items-center mt-6 gap-6 text-white">
-                <h1 class="text-mauve-500 dark:text-gray-500 font-bold text-2xl">Your currently following these cities</h1>
-                <div class="w-full flex flex-wrap gap-6">
-                    @foreach($userFavorites as $city)
-                        <x-favorite-city-card :city="$city" class="md:w-[calc(25%-24px)] xs:w-[calc(33%-24px)] w-full" />
-                    @endforeach
-                </div>
+                @auth
+                    <h1 class="text-mauve-500 dark:text-gray-500 font-bold text-2xl">Your currently following these cities</h1>
+                    <div class="w-full flex flex-wrap gap-6">
+                        @forelse($userFavorites as $city)
+                            <x-favorite-city-card :city="$city" class="md:w-[calc(25%-24px)] xs:w-[calc(33%-24px)] w-full" />
+                        @empty
+                            <div class="text-center w-full">
+                                <p class="text-sm text-mauve-500 dark:text-gray-500">You currently dont follow any city, add one 😀</p>
+                            </div>
+                        @endforelse
+                    </div>
+                @endauth
             </div>
         </div>
     </x-layout>

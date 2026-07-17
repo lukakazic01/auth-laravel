@@ -16,10 +16,12 @@
             <a href="{{ route('admin.create-forecast') }}">Create forecast</a>
         @endif
         </div>
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="cursor-pointer">Logout</button>
-        </form>
+        @if(auth()->check())
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="cursor-pointer">Logout</button>
+            </form>
+        @endif
     </div>
     <x-theme-switcher />
 </nav>
