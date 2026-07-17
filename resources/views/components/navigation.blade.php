@@ -9,7 +9,7 @@
         <div class="flex items-center gap-6">
             <a href="{{ route('home') }}">Home</a>
             <a href="{{ route('forecasts') }}">Forecasts</a>
-            <a href="{{ route('') }}">Weathers</a>
+            <a href="{{ route('weathers') }}">Weathers</a>
         @if (auth()->user()?->role === 'admin')
             <a href="{{ route('admin.dashboard') }}">Dashboard</a>
             <a href="{{ route('admin.create-weather') }}">Create weather</a>

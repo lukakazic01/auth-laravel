@@ -13,6 +13,8 @@ Route::get('/forecast/search', [ForecastController::class, 'search'])->name('for
 Route::get('/forecast/{city}', [ForecastController::class, 'show'])->name('show-forecast');
 Route::get('/forecasts', [ForecastController::class, 'index'])->name('forecasts');
 
+Route::get('/weathers', [WeatherController::class, 'index'])->name('weathers');
+
 Route::post('/user-cities/favorite/{city}', [UserCitiesController::class, 'favorite'])->name('user-favorite');
 
 Route::redirect('/prognoza', '/');
