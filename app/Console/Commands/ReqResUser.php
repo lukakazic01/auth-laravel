@@ -16,9 +16,15 @@ class ReqResUser extends Command
      */
     public function handle()
     {
-        $user2 = Http::withHeaders([
+        $user = Http::withHeaders([
             "x-api-key" => "free_user_3Gdjv9BRizp42oxx8DnS31lrAio",
-        ])->get('https://reqres.in/api/users/2');
-        dd($user2->json()["data"]["id"]);
+        ])->get('https://reqres.in/api/users/8');
+        $userCreate = Http::withHeaders([
+            "x-api-key" => "free_user_3Gdjv9BRizp42oxx8DnS31lrAio"
+        ])->post("https://reqres.in/api/users/2", [
+            "name" => "Luka",
+            "job" => "Full stack developer"
+        ]);
+        dd($userCreate->json());
     }
 }
