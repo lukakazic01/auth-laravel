@@ -1,5 +1,5 @@
 <div {{ $attributes->class(["flex flex-col"])->merge() }}>
-    <form action="{{ route('user-favorite', $city->id) }}" method="POST" class="flex justify-end">
+    <form action="{{ route('toggle-favorite', $city->id) }}" method="POST" class="flex justify-end">
         @csrf
         <button class="text-lg transition-colors cursor-pointer w-fit bg-mauve-100 dark:bg-gray-600 rounded-tr rounded-tl p-0.5">
             <i class="{{ $city->is_favorite ? 'fa-solid' : 'fa-regular' }} fa-heart text-red-500"></i>

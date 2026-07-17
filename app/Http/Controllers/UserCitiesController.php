@@ -16,7 +16,7 @@ class UserCitiesController extends Controller
         return view('home', compact('userFavorites'));
     }
 
-    public function favorite(Request $request, CityModel $city) {
+    public function toggleFavorite(Request $request, CityModel $city) {
         if (!auth()->check()) {
             return redirect()->back()->with(['error' => 'You must be logged in to put city and its forecast into favorites']);
         }

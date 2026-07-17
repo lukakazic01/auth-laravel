@@ -15,7 +15,7 @@ Route::get('/forecasts', [ForecastController::class, 'index'])->name('forecasts'
 
 Route::get('/weathers', [WeatherController::class, 'index'])->name('weathers');
 
-Route::post('/user-cities/favorite/{city}', [UserCitiesController::class, 'favorite'])->name('user-favorite');
+Route::post('/user-cities/toggle-favorite/{city}', [UserCitiesController::class, 'toggleFavorite'])->name('toggle-favorite');
 
 Route::redirect('/prognoza', '/');
 
