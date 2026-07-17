@@ -29,11 +29,7 @@ class ForecastController extends Controller
             return redirect()->route('home')->with(['message' => "There is no town '$search' matching our records, try with different value"]);
         }
         if (auth()->check()) {
-            $userFavorites = auth()->user()->cityFavorites->pluck('id');
-            $cities = $cities->map(function ($city) use ($userFavorites) {
-                $city->is_favorite = $userFavorites->contains($city->id);
-                return $city;
-            });
+            $cities = auth()->user()->withCityFavorites($cities);
         }
        return view('forecast.search', compact('cities'));
     }
