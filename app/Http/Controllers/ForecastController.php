@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CityModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class ForecastController extends Controller
 {
@@ -24,6 +25,9 @@ class ForecastController extends Controller
 
     public function search(Request $request) {
         $search = $request->query('search');
+        Artisan::call('weather:get-real', [ 'city' => $search ]);
+        $output = Artisan::output();
+        dd($output);
         $cities = CityModel::query()->whereLike('name', "%$search%")->with('todaysForecast')->get();
         if ($cities->isEmpty()) {
             return redirect()->route('home')->with(['message' => "There is no town '$search' matching our records, try with different value"]);
