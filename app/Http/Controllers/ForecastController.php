@@ -24,10 +24,33 @@ class ForecastController extends Controller
     }
 
     public function search(Request $request) {
-        $search = $request->query('search');
-        Artisan::call('weather:get-real', [ 'city' => $search ]);
-        $output = Artisan::output();
-        dd(json_decode($output, true));
+        $search = mb_convert_case($request->query('search'), MB_CASE_TITLE);
+
+        $city = CityModel::query()->where(['name' => $search])->first();
+        if (!$city?->todaysForecast) {
+            Artisan::call('weather:get-real', [ 'city' => $search ]);
+            $apiResponse = json_decode(Artisan::output(), true);
+            if ($apiResponse["statusCode"] >= 400) {
+                return redirect()->route('home')->with([
+                    'message' => $apiResponse['errorMessage'] ?? 'Unable to fetch weather data',
+                ]);
+            }
+            $forecasts = array_map(function ($forecast)  {
+                return [
+                    "temperature" => $forecast["day"]["avgtemp_c"],
+                    "date" => $forecast["date"],
+                    "weather_type" => $forecast["day"]["condition"]["text"],
+                    "probability" => $forecast["day"]["daily_chance_of_rain"],
+                ];
+            }, $apiResponse["forecast"]["forecastday"]);
+
+            // Because weather api can return different name than we searched for (search: NYC, weatherApi: New York)
+            $city = CityModel::query()->firstOrCreate([
+               "name" => $apiResponse["location"]["name"],
+           ]);
+            $city->forecasts()->createMany($forecasts);
+        }
+
         $cities = CityModel::query()->whereLike('name', "%$search%")->with('todaysForecast')->get();
         if ($cities->isEmpty()) {
             return redirect()->route('home')->with(['message' => "There is no town '$search' matching our records, try with different value"]);

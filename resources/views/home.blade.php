@@ -5,7 +5,7 @@
             <div class="flex flex-col gap-6 justify-center items-center">
                 <div class="max-w-lg w-full">
                     @if(session()->has('message'))
-                        <div class="bg-blue-100 dark:bg-blue-900 rounded-lg mb-6 text-sm border border-blue-500 text-blue-500 w-full px-6 py-4 text-center">
+                        <div class="bg-blue-100 dark:bg-blue-900 rounded-lg mb-6 text-sm border border-blue-500 text-blue-500 w-full px-6 py-4 text- mt-4">
                             {{ session()->get('message') }}
                         </div>
                     @endif

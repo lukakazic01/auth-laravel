@@ -7,7 +7,8 @@ return [
         'Rainy' => 'https://cdn.meteocons.com/3.0.0-next.10/svg/fill/rain.svg',
         'Stormy' => 'https://cdn.meteocons.com/3.0.0-next.10/svg/fill/thunderstorms.svg',
         'Snowy' => 'https://cdn.meteocons.com/3.0.0-next.10/svg/fill/snow.svg',
-        'Sleet' => 'https://cdn.meteocons.com/3.0.0-next.10/svg/fill/sleet.svg'
+        'Sleet' => 'https://cdn.meteocons.com/3.0.0-next.10/svg/fill/sleet.svg',
+        'Patchy rain nearby' => 'https://cdn.meteocons.com/3.0.0-next.10/svg/fill/rain.svg',
     ],
     'temperatureRangesByWeatherType' => [
         'Cloudy' => [-50, 15], // min,max

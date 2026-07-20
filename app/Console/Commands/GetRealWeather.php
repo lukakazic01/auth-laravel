@@ -27,7 +27,10 @@ class GetRealWeather extends Command
             "aqi" => "no"
         ]);
         if ($response->successful()) {
-            $this->line(json_encode($response->json()));
+            $this->line(json_encode([
+                "statusCode" => $response->status(),
+                ...$response->json()
+            ]));
         } else {
             $errorMessage = $response->json()["error"]["message"];
             $statusCode = $response->status();
