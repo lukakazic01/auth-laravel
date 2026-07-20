@@ -27,7 +27,7 @@ class ForecastController extends Controller
         $search = $request->query('search');
         Artisan::call('weather:get-real', [ 'city' => $search ]);
         $output = Artisan::output();
-        dd($output);
+        dd(json_decode($output, true));
         $cities = CityModel::query()->whereLike('name', "%$search%")->with('todaysForecast')->get();
         if ($cities->isEmpty()) {
             return redirect()->route('home')->with(['message' => "There is no town '$search' matching our records, try with different value"]);

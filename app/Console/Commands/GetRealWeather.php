@@ -27,12 +27,12 @@ class GetRealWeather extends Command
             "aqi" => "no"
         ]);
         if ($response->successful()) {
-            dd($response->json());
+            $this->line(json_encode($response->json()));
         } else {
             $errorMessage = $response->json()["error"]["message"];
             $statusCode = $response->status();
             $reason = $response->reason();
-            dd(compact('errorMessage', 'statusCode', 'reason'));
+            $this->line(json_encode(compact('errorMessage', 'statusCode', 'reason')));
         }
     }
 }
