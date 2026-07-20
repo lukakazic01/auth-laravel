@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\CityModel;
+use App\Services\ForecastService;
+use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 
 class ForecastController extends Controller
 {
@@ -23,32 +24,19 @@ class ForecastController extends Controller
         return view('forecast.city', compact('city'));
     }
 
-    public function search(Request $request) {
+    public function search(Request $request, ForecastService $forecastService) {
         $search = mb_convert_case($request->query('search'), MB_CASE_TITLE);
 
         $city = CityModel::query()->where(['name' => $search])->first();
         if (!$city?->todaysForecast) {
-            Artisan::call('weather:get-real', [ 'city' => $search ]);
-            $apiResponse = json_decode(Artisan::output(), true);
-            if ($apiResponse["statusCode"] >= 400) {
-                return redirect()->route('home')->with([
-                    'message' => $apiResponse['errorMessage'] ?? 'Unable to fetch weather data',
-                ]);
+            try {
+                $apiResponse = $forecastService->getForecastForCity($search);
+            } catch (Exception $e) {
+                return redirect()->route('home')->with(['message' => $e->getMessage()]);
             }
-            $forecasts = array_map(function ($forecast)  {
-                return [
-                    "temperature" => $forecast["day"]["avgtemp_c"],
-                    "date" => $forecast["date"],
-                    "weather_type" => $forecast["day"]["condition"]["text"],
-                    "probability" => $forecast["day"]["daily_chance_of_rain"],
-                ];
-            }, $apiResponse["forecast"]["forecastday"]);
-
             // Because weather api can return different name than we searched for (search: NYC, weatherApi: New York)
-            $city = CityModel::query()->firstOrCreate([
-               "name" => $apiResponse["location"]["name"],
-           ]);
-            $city->forecasts()->createMany($forecasts);
+            $city = CityModel::query()->firstOrCreate(["name" => $apiResponse["location"]["name"]]);
+            $forecastService->createForecastsForCity($city, $apiResponse["forecast"]["forecastday"]);
         }
 
         $cities = CityModel::query()->whereLike('name', "%$search%")->with('todaysForecast')->get();

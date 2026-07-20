@@ -45,6 +45,6 @@ class CityModel extends Model
     public function todaysForecast(): HasOne {
         return $this
             ->hasOne(ForecastModel::class, "city_id", "id")
-            ->whereDate('date', now());
+            ->whereDate('date', now('Europe/Belgrade'));
     }
 }
