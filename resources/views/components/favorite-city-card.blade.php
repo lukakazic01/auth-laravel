@@ -9,7 +9,7 @@
         <a href="{{ route('show-forecast', $city->name) }}" class="block">
             <div class="bg-mauve-400 p-2 flex justify-between items-center dark:bg-gray-800 text-white rounded w-full">
                 <span>{{ $city->name }}</span>
-                <img height="30" width="30" src="{{ config("constants.weatherTypes.{$city->todaysForecast->weather_type}") }}" />
+                <img height="30" width="30" src="{{ config("constants.weatherTypes")[$city->todaysForecast->weather_type] ?? config("constants.weatherTypes.Default") }}" />
             </div>
         </a>
     </div>

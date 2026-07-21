@@ -9,6 +9,7 @@ return [
         'Snowy' => 'https://cdn.meteocons.com/3.0.0-next.10/svg/fill/snow.svg',
         'Sleet' => 'https://cdn.meteocons.com/3.0.0-next.10/svg/fill/sleet.svg',
         'Patchy rain nearby' => 'https://cdn.meteocons.com/3.0.0-next.10/svg/fill/rain.svg',
+        'Default' => 'https://cdn.meteocons.com/3.0.0-next.10/svg/fill/clear-day.svg',
     ],
     'temperatureRangesByWeatherType' => [
         'Cloudy' => [-50, 15], // min,max

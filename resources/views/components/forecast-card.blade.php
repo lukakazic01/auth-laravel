@@ -11,7 +11,7 @@
             <li class="flex relative flex-col rounded-lg bg-mauve-300 dark:bg-gray-700/60 px-3 py-2">
                 <p class="flex justify-between items-center">
                     <img width="30" height="30" alt="{{ $forecast->weather_type }}"
-                         src="{{ config("constants.weatherTypes.$forecast->weather_type") }}"/>
+                         src="{{ config("constants.weatherTypes")[$forecast->weather_type] ?? config("constants.weatherTypes.Default") }}"/>
                     <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ $forecast->weather_type }}</span>
                 </p>
                 <p class="flex justify-between items-center">
