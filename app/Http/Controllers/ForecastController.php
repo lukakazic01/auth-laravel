@@ -16,15 +16,10 @@ class ForecastController extends Controller
         return view('forecast.index', compact('cities'));
     }
 
-    public function show(string $cityName)
+    public function show(ForecastService $forecastService, string $cityName)
     {
         $cityName = mb_convert_case($cityName, MB_CASE_TITLE);
-        $response = Http::withOptions(['verify' => false])->get(env('WEATHER_API_URL').'/v1/astronomy.json', [
-            "key" => env('WEATHER_API_KEY'),
-            "q" => $cityName,
-            "aqi" => "no"
-        ])->json();
-
+        $response = $forecastService->getAstronomyForCity($cityName);
         $sunset = $response["astronomy"]["astro"]["sunset"] ?? null;
         $sunrise = $response["astronomy"]["astro"]["sunrise"] ?? null;
         $city = CityModel::query()

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\CityModel;
 use Exception;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Http;
 
 class ForecastService
 {
@@ -19,6 +20,14 @@ class ForecastService
             throw new Exception($apiResponse['errorMessage'] ?? 'Unable to fetch weather data');
         }
         return $apiResponse;
+    }
+
+    public function getAstronomyForCity(string $city) {
+        return Http::withOptions(['verify' => false])->get(env('WEATHER_API_URL').'/v1/astronomy.json', [
+            "key" => env('WEATHER_API_KEY'),
+            "q" => $city,
+            "aqi" => "no"
+        ])->json();
     }
 
     public function createForecastsForCity(CityModel|null $city, array $forecasts): void
