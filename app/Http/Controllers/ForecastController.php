@@ -6,6 +6,7 @@ use App\Models\CityModel;
 use App\Services\ForecastService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class ForecastController extends Controller
 {
@@ -17,10 +18,21 @@ class ForecastController extends Controller
 
     public function show(string $cityName)
     {
+        $cityName = mb_convert_case($cityName, MB_CASE_TITLE);
+        $response = Http::withOptions(['verify' => false])->get(env('WEATHER_API_URL').'/v1/astronomy.json', [
+            "key" => env('WEATHER_API_KEY'),
+            "q" => $cityName,
+            "aqi" => "no"
+        ])->json();
+
+        $sunset = $response["astronomy"]["astro"]["sunset"] ?? null;
+        $sunrise = $response["astronomy"]["astro"]["sunrise"] ?? null;
         $city = CityModel::query()
             ->with(['weather', 'forecasts'])
-            ->where(['name' => mb_convert_case($cityName, MB_CASE_TITLE)])
+            ->where(['name' => $cityName])
             ->firstOrFail();
+        $city->sunset = $sunset;
+        $city->sunrise = $sunrise;
         return view('forecast.city', compact('city'));
     }
 

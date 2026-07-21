@@ -11,7 +11,18 @@
                         </p>
                     </div>
                 </div>
-
+                @if ($city->sunset && $city->sunrise)
+                    <div class="flex justify-between text-xs text-gray-400 mt-2">
+                        <p class="flex flex-col">
+                            <span>Sunset:</span>
+                            {{$city->sunset}}
+                        </p>
+                        <p class="flex flex-col">
+                            <span>Sunrise:</span>
+                            {{$city->sunrise}}
+                        </p>
+                    </div>
+                @endif
             @if($city->weather)
                 <div class="flex items-center justify-between mt-4">
                         <div>
@@ -55,7 +66,7 @@
                         <div class="text-center text-xs dark:text-white">
                             {{ $forecast?->temperature ?? '/' }} C&#176;
                         </div>
-                        <img class="" width="30" height="30" src="{{ config("constants.weatherTypes.$forecast->weather_type") }}" />
+                        <img class="" width="30" height="30" src="{{ config("constants.weatherTypes")[$forecast->weather_type] ?? config("constants.weatherTypes.Default") }}" />
                     </div>
                 @endforeach
             </div>
